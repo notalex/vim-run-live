@@ -1,0 +1,9 @@
+h2. vim-watch-run.vim
+
+h4. Installation
+
+bq. If you don't have a preferred installation method, I recommend using "Vundle":https://github.com/gmarik/vundle
+
+With Vundle, you may simply add *Bundle 'notalex/vim-watch-run'* to your *.vimrc* and run
+
+bc. :BundleInstall
