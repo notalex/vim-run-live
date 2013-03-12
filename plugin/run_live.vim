@@ -4,6 +4,8 @@ else
   let g:loaded_run_live = 1
 endif
 
+call run_live_lib#InitializeGlobalVariable('remember_entered_command')
+
 " Live Mode {{{1
 
 command! WatchBuffer call watcher#InitializeAndWatchBuffer()

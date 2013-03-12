@@ -50,3 +50,11 @@ function! run_live_lib#AdjustWindowHeight()
   let adjusted_height = min([results_window_height, content_height])
   execute 'resize ' . adjusted_height
 endfunction
+
+function! run_live_lib#InitializeGlobalVariable(variable_name)
+  let variable_name = 'run_live_' . a:variable_name
+
+  if !exists('g:{variable_name}')
+    let g:{variable_name} = 0
+  endif
+endfunction
