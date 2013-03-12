@@ -1,5 +1,11 @@
 " Initialization {{{1
 
+if exists('g:loaded_run_live_watcher')
+  finish
+else
+  let g:loaded_run_live_watcher = 1
+endif
+
 let s:results_window_prefix = '__Live_Results_Window__'
 
 if !exists('g:run_live_events')

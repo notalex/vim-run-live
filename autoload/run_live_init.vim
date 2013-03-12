@@ -1,6 +1,16 @@
 " Should contain common initialization functions.
 
-" Private functions{{{
+" Initialization {{{1
+
+if exists('g:loaded_run_live_init')
+  finish
+else
+  let g:loaded_run_live_init = 1
+endif
+
+" }}}
+
+" Private functions{{{1
 
   function! s:SaveAutocommand(command_name, command)
     let autocommand = 'autocmd! FileType ' . &filetype . ' let b:' . a:command_name . ' = ' . shellescape(a:command)

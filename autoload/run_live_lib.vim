@@ -1,5 +1,15 @@
 " Should contain independent reusable functions.
 
+" Initialization {{{1
+
+if exists('g:loaded_run_live_lib')
+  finish
+else
+  let g:loaded_run_live_lib = 1
+endif
+
+" }}}
+
 function! run_live_lib#SwitchToWindow(window_number)
   execute a:window_number . 'wincmd w'
 endfunction

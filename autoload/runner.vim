@@ -1,5 +1,11 @@
 " Initialization {{{1
 
+if exists('g:loaded_run_live_runner')
+  finish
+else
+  let g:loaded_run_live_runner = 1
+endif
+
 let s:results_window_prefix = '__Run_Results_Window__'
 
 " }}}
