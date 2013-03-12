@@ -1,23 +1,9 @@
 " Initialization {{{1
 
-let s:error_message = ''
 let s:results_window_prefix = '__Run_Results_Window__'
 
 " }}}
 " Private functions {{{1
-
-function! s:Initialize()
-  if !exists('b:run_mode_command')
-    if exists('b:live_mode_command')
-      let b:run_mode_command = b:live_mode_command
-    else
-      let s:error_message = 'Please define b:run_mode_command. See :help run_live for more details.'
-    endif
-  endif
-
-  " This function should be true when no errors. When no errors !0 => 1.
-  return !strlen(s:error_message)
-endfunction
 
 function! s:ResultsWindowName()
   return s:results_window_prefix . bufnr('%')
@@ -57,9 +43,11 @@ endfunction
 " }}}
 
 function! runner#InitializeAndRun(visualmode)
-  if s:Initialize()
-    call s:RunBuffer(a:visualmode)
+  let error_message = run_live_init#CommandSetup('run_mode')
+
+  if strlen(error_message)
+    echom error_message
   else
-    echom s:error_message
+    call s:RunBuffer(a:visualmode)
   endif
 endfunction
