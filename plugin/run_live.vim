@@ -14,7 +14,7 @@ command! WatchBuffer call watcher#InitializeAndWatchBuffer()
 " Run Mode {{{
 
 if !exists('g:run_mode_map')
-  let g:run_mode_map = '<localleader>r'
+  let g:run_mode_map = '<Leader>r'
 endif
 
 execute 'nnoremap ' . g:run_mode_map . ' :call runner#InitializeAndRun(0)<cr>'
