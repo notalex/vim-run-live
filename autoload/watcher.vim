@@ -28,7 +28,7 @@ function! s:FindOrCreateResultsWindow()
   let window_number = bufwinnr(results_window_name)
 
   if window_number > 0
-    call lib#SwitchToWindow(window_number)
+    call run_live_lib#SwitchToWindow(window_number)
   else
     call s:CreateResultsWindow(results_window_name)
     autocmd! BufWipeOut <buffer> call s:UnwatchBuffer()
@@ -37,18 +37,18 @@ endfunction
 
 function! s:AddToResultsWindow(result)
   call s:FindOrCreateResultsWindow()
-  call lib#ClearScreen()
-  call lib#Append(a:result)
+  call run_live_lib#ClearScreen()
+  call run_live_lib#Append(a:result)
 endfunction
 
 function! s:RunCommandAndAddResults()
-  let script = lib#GetAllContent()
+  let script = run_live_lib#GetAllContent()
 
   let result = system(b:live_mode_command, script)
 
   let working_window_number = winnr()
   call s:AddToResultsWindow(result)
-  call lib#SwitchToWindow(working_window_number)
+  call run_live_lib#SwitchToWindow(working_window_number)
 endfunction
 
 function! s:UnwatchBuffer()
