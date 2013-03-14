@@ -6,7 +6,7 @@ This plugin can...
 * Run a specific selection
 * Watch for changes and run buffer
 
-One needs to specify the shell command needed to run the buffer. The plugin will prompt for a shell command when its missing and can also save the shell command for future use. 
+One needs to specify the shell command needed to run the buffer. The plugin will prompt for a shell command when its missing and can also save the shell command for future use.
 
 There are primarily two modes. Run and Live.
 
@@ -29,32 +29,51 @@ Live mode is triggered by the plugin command `:WatchBuffer`
 
 ## Configuration
 
-> Other than the 2 installation steps, this plugin requires no additional configuration to get started. In the above example when `<Leader>r` or `:WatchBuffer` is run, the plugin will ask for the shell command to associate with the current buffer
+Other than the 2 installation steps, this plugin requires no additional configuration to get started. In the above example when `<Leader>r` or `:WatchBuffer` is run, the plugin will ask for the shell command to associate with the current buffer
 
 ![](https://raw.github.com/notalex/vim-run-live/screenshots/screenshots/shell-command-prompt.png)
 _Each buffer can have its own results window and its own separate shell command._
 
-> For a more permanent usage, one can use the ftplugin folder or an autocommand.
+> For a more permanent usage, one may use the ftplugin folder or an autocommand.
 
-### ftplugin
+### Ftplugin
 
-Vim detects the file type and reads the appropriate file from the ftplugin directory. For example, to add a coffeescript mapping for run_live:
+Vim detects the file type and reads the appropriate file from the ftplugin directory. For example, to add a coffeescript mapping for _run_live_:
 
 ```vim
 " ~/.vim/ftplugin/coffee.vim
-let b:run_live_command = 'coffee'
+let b:run_live_command = 'coffee -s'
 ```
 
-### One may also simply add a autocmd for the mapping.
+### Autocommand
+
+It simpler to just add an autocommand for the mapping.
 
 ```vim
-  autocmd! FileType coffee let b:run_live_command = 'coffee'
+" ~/.vimrc
+autocmd! FileType coffee let b:run_live_command = 'coffee -s'
 ```
 
-> This plugin also provides a way to save user entered shell command for future use. 
+### Automatically saving autocommand
+
+> This plugin also provides a way to automatically save user entered shell command for future use.
 
 ```vim
-  let g:run_live_remember_entered_command = 1
+" ~/.vimrc
+let g:run_live_remember_entered_command = 1
+```
+
+The next time, _run_live_ asks for a shell command, it will save the entered input into `$HOME/.vim/plugin/run_live_autocommands.vim`.
+
+```vim
+" ~/.vim/plugin/run_live_autocommands.vim
+autocmd! FileType coffee let b:run_mode_command = 'coffee -s'
+```
+
+## Help
+
+```vim
+:help run_live
 ```
 
 ## Additional Notes
