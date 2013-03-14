@@ -8,15 +8,22 @@ else
   let g:loaded_run_live_init = 1
 endif
 
+let s:vim_path = $HOME . '/.vim'
+let s:vim_plugin_path = s:vim_path . '/plugin'
 " }}}
 
 " Private functions{{{1
+function! s:CreateVimPluginFolder()
+  silent! call mkdir(s:vim_path)
+  silent! call mkdir(s:vim_plugin_path)
+endfunction
 
-  function! s:SaveAutocommand(command_name, command)
-    let autocommand = 'autocmd! FileType ' . &filetype . ' let b:' . a:command_name . ' = ' . shellescape(a:command)
-    execute autocommand
-    call system("echo " . shellescape(autocommand) . " >> " . $MYVIMRC)
-  endfunction
+function! s:SaveAutocommand(command_name, command)
+  let autocommand = 'autocmd! FileType ' . &filetype . ' let b:' . a:command_name . ' = ' . shellescape(a:command)
+  execute autocommand
+  call s:CreateVimPluginFolder()
+  call system("echo " . shellescape(autocommand) . " >> " . s:vim_plugin_path . '/run_live_autocommands.vim')
+endfunction
 
 " }}}
 
