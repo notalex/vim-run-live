@@ -9,24 +9,22 @@ else
 endif
 
 let s:vim_path = $HOME . '/.vim'
-let s:vim_plugin_path = s:vim_path . '/plugin'
+let s:vim_ftplugin_path = s:vim_path . '/ftplugin'
 " }}}
 
 " Private functions{{{1
 function! s:CreateVimPluginFolder()
   silent! call mkdir(s:vim_path)
-  silent! call mkdir(s:vim_plugin_path)
+  silent! call mkdir(s:vim_ftplugin_path)
 endfunction
 
 function! s:SaveAutocommand(command_name, command)
-  let autocommand = 'autocmd! FileType ' . &filetype . ' let ' . a:command_name . ' = ' . shellescape(a:command)
-  " Add autocommand to current vim's memory.
-  execute autocommand
-  " Detecting filetype executes the associated autocommand for current buffer.
-  filetype detect
+  let buffer_command = 'let ' . a:command_name . ' = ' . shellescape(a:command)
+
+  execute buffer_command
 
   call s:CreateVimPluginFolder()
-  call system("echo " . shellescape(autocommand) . " >> " . s:vim_plugin_path . '/run_live_autocommands.vim')
+  call system("echo " . shellescape(buffer_command) . " >> " . s:vim_ftplugin_path . '/' . &filetype . '.vim')
 endfunction
 
 " }}}
