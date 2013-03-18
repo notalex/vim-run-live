@@ -19,8 +19,12 @@ function! s:CreateVimPluginFolder()
 endfunction
 
 function! s:SaveAutocommand(command_name, command)
-  let autocommand = 'autocmd! FileType ' . &filetype . ' let b:' . a:command_name . ' = ' . shellescape(a:command)
+  let autocommand = 'autocmd! FileType ' . &filetype . ' let ' . a:command_name . ' = ' . shellescape(a:command)
+  " Add autocommand to current vim's memory.
   execute autocommand
+  " Detecting filetype executes the associated autocommand for current buffer.
+  filetype detect
+
   call s:CreateVimPluginFolder()
   call system("echo " . shellescape(autocommand) . " >> " . s:vim_plugin_path . '/run_live_autocommands.vim')
 endfunction
@@ -44,7 +48,7 @@ function! run_live_init#CommandSetup(mode)
         let b:{command_name} = user_input
 
         if g:run_live_remember_entered_command
-          call s:SaveAutocommand(command_name, user_input)
+          call s:SaveAutocommand('b:run_live_command', user_input)
         endif
       else
         let error_message = 'Please define b:run_live_command. See :help run_live for more details.'
