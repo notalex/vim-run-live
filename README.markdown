@@ -2,9 +2,9 @@
 
 This plugin can...
 
-* Run an entire buffer
-* Run a specific selection
-* Watch for changes and run buffer
+* Run a specified shell command on an entire buffer.
+* Run a specified shell command for a selection.
+* Watch for changes in the buffer and run a shell command automatically.
 
 One needs to specify the shell command needed to run the buffer. The plugin will prompt for a shell command when its missing and can also save the shell command for future use.
 
@@ -54,26 +54,51 @@ It simpler to just add an autocommand for the mapping.
 autocmd! FileType coffee let b:run_live_command = 'coffee -s'
 ```
 
+## The Awesome Parts
+
 ### Automatically saving autocommand
 
 > This plugin also provides a way to automatically save user entered shell command for future use.
 
 ```vim
 " ~/.vimrc
-let g:run_live_remember_entered_command = 1
+let g:run_live_remember_shell_command = 1
 ```
 
-The next time, _run_live_ asks for a shell command, it will save the entered input into `$HOME/.vim/plugin/run_live_autocommands.vim`.
+The next time, _run_live_ asks for a shell command for a coffeesript file, it will append the shell command to an appropriate ftplugin file.
 
 ```vim
-" ~/.vim/plugin/run_live_autocommands.vim
-autocmd! FileType coffee let b:run_mode_command = 'coffee -s'
+" ~/.vim/ftplugin/coffee.vim
+let b:run_live_command = 'coffee -s'
 ```
+
+### Skipping results window
+
+> This plugin includes a setting to control skipping results window during window navigation.
+
+```vim
+" ~/.vimrc
+let g:run_live_results_window_skip_threshold = 2
+```
+
+When the number of windows in the current tab exceeds the threshold number, the results window will be skipped during window navigation.
+
+### Running separate commands for run and live modes
+
+> There are individual commands for run and live modes in addition to the common `b:run_live_command`. This can be helpful for languages like **coffeescript**.
+
+```vim
+" ~/.vimrc
+let b:run_mode_command = 'coffee -s'
+let b:live_mode_command = 'coffee -scb'
+```
+
+![](https://raw.github.com/notalex/vim-run-live/screenshots/screenshots/run-live-mode-commands.png)
 
 ## Help
 
 ```vim
-:help run_live
+:help run-live
 ```
 
 ## Additional Notes
