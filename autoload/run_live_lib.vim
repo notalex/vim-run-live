@@ -15,7 +15,8 @@ function! run_live_lib#SwitchToWindow(window_number)
 endfunction
 
 function! run_live_lib#Append(result)
-  call setline(1, split(a:result, '\v\n'))
+  call append(0, split(a:result, '\v\n'))
+  normal! gg
 endfunction
 
 function! run_live_lib#ClearScreen()
