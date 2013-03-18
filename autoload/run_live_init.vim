@@ -47,7 +47,7 @@ function! run_live_init#CommandSetup(mode)
       if strlen(user_input)
         let b:{command_name} = user_input
 
-        if g:run_live_remember_entered_command
+        if g:run_live_remember_shell_command
           call s:SaveAutocommand('b:run_live_command', user_input)
         endif
       else
