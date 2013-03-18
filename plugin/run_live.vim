@@ -4,7 +4,8 @@ else
   let g:loaded_run_live = 1
 endif
 
-call run_live_lib#InitializeGlobalVariable('remember_entered_command')
+call run_live_lib#InitializeGlobalVariable('remember_shell_command')
+call run_live_lib#InitializeGlobalVariable('results_window_skip_threshold')
 
 " Live Mode {{{1
 
