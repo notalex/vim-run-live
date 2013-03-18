@@ -1,0 +1,211 @@
+*run-live.txt*                        Run or Watch current buffer
+
+===============================================================================
+CONTENTS                                                   *run-live-contents*
+
+  Introduction  ............................ |run-live-introduction|
+  Configuration ............................ |run-live-configuration|
+  Modes         ............................ |run-live-modes|
+  Mappings      ............................ |run-live-mappings|
+  Commands      ............................ |run-live-commands|
+  Advanced      ............................ |run-live-advanced|
+  Where to add these options? .............. |run-live-locations|
+
+===============================================================================
+INTRODUCTION                                           *run-live-introduction*
+
+  This plugin can...
+
+  * Run a specified shell command on an entire buffer.
+  * Run a specified shell command for a selection.
+  * Watch for changes in the buffer and run a shell command automatically.
+
+  Being mostly written in Vimscript, |run-live| will run anywhere Vim can
+  run. There is some advanced configuration that involves invoking Unix system
+  commands. These are disabled by default and will not affect normal
+  |run-live| operations.
+
+===============================================================================
+CONFIGURATION                                         *run-live-configuration*
+
+  This plugin does not need any configuration to get started. Open any file
+  and hit any of the |run-live-commands| to see it in action. For advanced
+  configuration options see |run-live-mappings| and |run-live-advanced|.
+
+===============================================================================
+MODES                                                        *run-live-modes*
+
+  Depending on the invoked command, run-live can behave in two different
+  contexts.
+
+-------------------------------------------------------------------------------
+RUN MODE~
+
+The default run mode mapping is |<Leader>|r.
+
+Run mode can run a specified shell command on an entire buffer or a specific
+selection. The provided shell command will be unique to the buffer. Thus each
+buffer can associate itself to a different shell command.
+
+For remapping the run mode trigger see |run-live-mappings|.
+
+-------------------------------------------------------------------------------
+LIVE MODE~
+
+The live mode is triggered by the command |:WatchBuffer|
+
+When provided with a shell command, it runs it everytime the the current
+buffer is written or when the cursor exits insert mode. The events that
+trigger the shell command are completely changeable. See |run-live-advanced|
+for configuring events.
+
+===============================================================================
+MAPPINGS                                                 *run-live-mappings*
+
+Brief:~
+
+  Mapping to trigger run mode ................ g:|run_mode_map|
+  Command to start live mode  ................ |WatchBuffer|
+
+-------------------------------------------------------------------------------
+Details:~
+
+                                                            *'g:run_mode_map'*
+Changing this mappings changes the key to trigger run mode. |<Leader>| is
+backslash(\) by default.
+>
+   let g:run_mode_map = <Leader>r
+<
+
+===============================================================================
+COMMANDS                                                 *run-live-commands*
+
+Brief:~
+
+  Mapping to run both modes .................. b:|run_live_command|
+  Mapping for run mode      .................. b:|run_mode_command|
+  Mapping for live mode     .................. b:|live_mode_command|
+
+-------------------------------------------------------------------------------
+Details:~
+
+                                                       *'b:run_live_command'*
+
+  This command is common to both modes and hence can be used when two separate
+commands are not needed. E.g., for ruby we usually need the same command
+>
+   let b:run_live_command = 'ruby'
+<
+
+                                                       *'b:run_mode_command'*
+
+  This can be useful when a specific command needs to be run during run mode.
+E.g., it can be desirable to view the evaluated result when a coffeescript file is
+run.
+>
+   let b:run_mode_command = 'coffee -s'
+<
+
+                                                       *'b:live_mode_command'*
+
+  This can be useful when a specific command needs to be run during live mode.
+E.g., one can have the live preview mode as seen on the coffeescript site.
+>
+   let b:live_mode_command = 'coffee -scb'
+<
+
+===============================================================================
+ADVANCED OPTIONS                                            *run-live-advanced*
+
+Brief:
+
+  Remember shell command .......... g:|run_live_remember_shell_command|
+  Skip results window    .......... g:|run_live_results_window_skip_threshold|
+  Live mode events       .......... g:|run_live_events|
+
+-------------------------------------------------------------------------------
+Details:~
+
+                                         *'g:run_live_remember_shell_command'*
+
+  Enabling this will allow the plugin to automatically save entered shell
+commands for future use. To enable, set the value to 1.
+>
+  let g:run_live_remember_shell_command = 0
+<
+
+                                  *'g:run_live_results_window_skip_threshold'*
+
+  Its usually annoying to land up in a results window when navigating through
+several other important ones. Setting a threshold will disable navigation to
+the results window when the number of windows in the current tab exceeds the
+threshold. The default value of 0 indicates no skipping behaviour.
+>
+  let g:run_live_results_window_skip_threshold = 0
+<
+
+  Its usually desirable to set a threshold of 2. In doing so one can
+navigate to the results window when no other window is around, but skip it
+when a third window comes into picture.
+
+                                                    *'g:run_live_events'*
+
+  The results window for live mode is updated whenever the buffer is written or
+one leaves the insert mode. These events are stored in the g:|run_live_events|
+variable.
+>
+  let g:run_live_events = 'InsertLeave,BufWritePost'
+<
+
+  See 'autocmd-events' for a list of events that Vim supports. Add or remove
+events in this variable to customize the live preview for your scripts.
+
+===============================================================================
+LOCATIONS                                                 *run-live-locations*
+
+Where to add these options?
+
+-------------------------------------------------------------------------------
+Global options(options preceded by g:)
+
+These can be placed in your ~/.vimrc file.
+
+~/.vimrc
+>
+  let g:run_live_remember_shell_command = 1
+  let g:run_live_results_window_skip_threshold = 2
+<
+
+-------------------------------------------------------------------------------
+Buffer options(options preceded by b:)
+
+These need to be either in a ftplugin or as an autocmd.
+
+1. ftplugin
+
+Using is an ftplugin is simple. Add a file to ~/.vim/ftplugin with the name of
+the filetype for the file.
+
+E.g., For a python file, one can add the following
+
+~/.vim/ftplugin/python.vim
+>
+  let b:run_live_command = 'python'
+<
+
+2. autocmd
+
+The autocommand can be added to .vimrc. For the above example the following
+line may be added
+
+~/.vimrc
+>
+  autocmd! FileType coffee let b:run_live_command = 'coffee -s'
+<
+
+With autocmd, however one must also add augroup. Read on 'autocmd-groups' for
+more information.
+
+First Release: 15-March-2013
+===============================================================================
+vim:tw=78:ts=8:ft=help:norl:
