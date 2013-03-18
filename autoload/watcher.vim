@@ -31,6 +31,7 @@ function! s:FindOrCreateResultsWindow()
     call run_live_lib#SwitchToWindow(window_number)
   else
     call s:CreateResultsWindow(results_window_name)
+    call run_live_lib#SetupUpSkipper()
     autocmd! BufWipeOut <buffer> call s:UnwatchBuffer()
   endif
 endfunction

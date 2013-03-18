@@ -8,6 +8,10 @@ else
   let g:loaded_run_live_lib = 1
 endif
 
+if !exists('g:run_live_results_window_skip_threshold')
+  let g:run_live_results_window_skip_threshold = 0
+end
+
 " }}}
 
 function! run_live_lib#SwitchToWindow(window_number)
@@ -67,5 +71,17 @@ function! run_live_lib#InitializeGlobalVariable(variable_name)
 
   if !exists('g:{variable_name}')
     let g:{variable_name} = 0
+  endif
+endfunction
+
+function! run_live_lib#SetupUpSkipper()
+  if g:run_live_results_window_skip_threshold
+    autocmd! BufEnter <buffer> :call run_live_lib#SkipResultsWindow()
+  endif
+endfunction
+
+function! run_live_lib#SkipResultsWindow()
+  if len(tabpagebuflist()) > g:run_live_results_window_skip_threshold
+    wincmd w
   endif
 endfunction

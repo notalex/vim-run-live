@@ -24,6 +24,7 @@ function! s:AddToResultsWindow(result)
   call s:CreateResultsWindow()
   call run_live_lib#ClearScreen()
   call run_live_lib#Append(a:result)
+  call run_live_lib#SetupUpSkipper()
   call run_live_lib#AdjustWindowHeight()
 endfunction
 
