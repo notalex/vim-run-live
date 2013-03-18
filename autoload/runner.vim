@@ -7,6 +7,7 @@ else
 endif
 
 let s:results_window_prefix = '__Run_Results_Window__'
+let s:working_window_number = 1
 
 " }}}
 " Private functions {{{1
@@ -26,6 +27,17 @@ function! s:AddToResultsWindow(result)
   call run_live_lib#AdjustWindowHeight()
 endfunction
 
+function! s:SaveWorkingWindow()
+  let s:working_window_number = winnr()
+  normal! ''
+  normal! gg
+endfunction
+
+function! s:RestoreWorkingWindow()
+  call run_live_lib#SwitchToWindow(s:working_window_number)
+  normal! `'
+endfunction
+
 function! s:RunBuffer(visualmode)
   if a:visualmode
     let script = run_live_lib#GetSelectedContent()
@@ -38,9 +50,9 @@ function! s:RunBuffer(visualmode)
   call run_live_lib#CloseWindow(s:ResultsWindowName())
 
   if strlen(result)
-    let working_window_number = winnr()
+    call s:SaveWorkingWindow()
     call s:AddToResultsWindow(result)
-    call run_live_lib#SwitchToWindow(working_window_number)
+    call s:RestoreWorkingWindow()
   else
     echom 'No results to display.'
   endif
