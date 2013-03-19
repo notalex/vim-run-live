@@ -113,4 +113,4 @@ With Vundle, you may simply add **Bundle 'notalex/vim-run-live'** to your *.vimr
 
     :BundleInstall
 
-[vundle_link]:(https://github.com/gmarik/vundle)
+[vundle_link]: https://github.com/gmarik/vundle
