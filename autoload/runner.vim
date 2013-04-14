@@ -30,13 +30,10 @@ endfunction
 
 function! s:SaveWorkingWindow()
   let s:working_window_number = winnr()
-  normal! m'
-  keepjumps normal! gg
 endfunction
 
 function! s:RestoreWorkingWindow()
   call run_live_lib#SwitchToWindow(s:working_window_number)
-  normal! g`'
 endfunction
 
 function! s:RunBuffer(visualmode)
