@@ -2,6 +2,8 @@ require 'tmpdir'
 require 'vimrunner'
 require 'vimrunner/testing'
 require 'minitest/autorun'
+require 'support/vimrunner_core_extensions'
+require 'support/vimrunner_custom_extensions'
 
 include Vimrunner::Testing
 
