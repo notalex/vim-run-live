@@ -1,0 +1,9 @@
+GEM
+  specs:
+    vimrunner (0.3.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  vimrunner
