@@ -6,6 +6,7 @@ if exists('g:loaded_run_live_lib')
   finish
 else
   let g:loaded_run_live_lib = 1
+  let s:bypass_threshold_check = 0
 endif
 
 " }}}
@@ -44,6 +45,7 @@ function! run_live_lib#CloseWindow(window_name)
   let window_number = bufwinnr(a:window_name)
 
   if window_number > 0
+    let s:bypass_threshold_check = 1
     call run_live_lib#SwitchToWindow(window_number)
     wincmd q
   endif
@@ -77,7 +79,9 @@ function! run_live_lib#SetupUpSkipper()
 endfunction
 
 function! run_live_lib#SkipResultsWindow()
-  if len(tabpagebuflist()) > g:run_live_results_window_skip_threshold
+  if s:bypass_threshold_check
+    let s:bypass_threshold_check = 0
+  elseif len(tabpagebuflist()) > g:run_live_results_window_skip_threshold
     wincmd w
   endif
 endfunction

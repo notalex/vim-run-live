@@ -21,5 +21,9 @@ module Vimrunner
       window_number = echo("bufwinnr('#{ name }')")
       switch_to_window_by_number(window_number)
     end
+
+    def current_window_name
+      echo("expand('%')")
+    end
   end
 end
