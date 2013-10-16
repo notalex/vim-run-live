@@ -24,13 +24,17 @@ function! run_live_lib#ClearScreen()
   normal! ggdG
 endfunction
 
-function! run_live_lib#GetAllContent()
-  let lines = getline(1, '$')
-  let all_content = join(lines, "\n")
-  return all_content
+function! run_live_lib#GetContentList()
+  return getline(1, '$')
 endfunction
 
-function! run_live_lib#GetSelectedContent()
+function! run_live_lib#WriteToFile(list)
+  let s:temp_file = tempname()
+  call writefile(a:list, s:temp_file)
+  return s:temp_file
+endfunction
+
+function! run_live_lib#GetSelectedContentList()
   let user_yanked_content = @@
 
   silent execute "normal! `<v`>y"
@@ -38,7 +42,7 @@ function! run_live_lib#GetSelectedContent()
 
   let @@ = user_yanked_content
 
-  return selected_content
+  return split(selected_content, "\n")
 endfunction
 
 function! run_live_lib#CloseWindow(window_name)

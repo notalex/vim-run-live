@@ -38,12 +38,13 @@ endfunction
 
 function! s:RunBuffer(visualmode)
   if a:visualmode
-    let script = run_live_lib#GetSelectedContent()
+    let s:content_list = run_live_lib#GetSelectedContentList()
   else
-    let script = run_live_lib#GetAllContent()
+    let s:content_list = run_live_lib#GetContentList()
   endif
 
-  let result = system(b:run_mode_command, script)
+  let s:content_file = run_live_lib#WriteToFile(s:content_list)
+  let result = system(b:run_mode_command . ' ' . s:content_file)
 
   call run_live_lib#CloseWindow(s:ResultsWindowName())
 

@@ -42,7 +42,7 @@ Vim detects the file type and reads the appropriate file from the ftplugin direc
 
 ```vim
 " ~/.vim/ftplugin/coffee.vim
-let b:run_live_command = 'coffee -s'
+let b:run_live_command = 'coffee'
 ```
 
 ### Autocommand
@@ -51,7 +51,7 @@ It simpler to just add an autocommand for the mapping.
 
 ```vim
 " ~/.vimrc
-autocmd! FileType coffee let b:run_live_command = 'coffee -s'
+autocmd! FileType coffee let b:run_live_command = 'coffee'
 ```
 
 ## The Awesome Parts
@@ -69,7 +69,7 @@ The next time, _run_live_ asks for a shell command for a coffeesript file, it wi
 
 ```vim
 " ~/.vim/ftplugin/coffee.vim
-let b:run_live_command = 'coffee -s'
+let b:run_live_command = 'coffee'
 ```
 
 ### Skipping results window
@@ -89,8 +89,8 @@ When the number of windows in the current tab exceeds the threshold number, the 
 
 ```vim
 " ~/.vimrc
-let b:run_mode_command = 'coffee -s'
-let b:live_mode_command = 'coffee -scb'
+let b:run_mode_command = 'coffee'
+let b:live_mode_command = 'coffee -cp'
 ```
 
 ![](https://raw.github.com/notalex/vim-run-live/screenshots/screenshots/run-live-mode-commands.png)

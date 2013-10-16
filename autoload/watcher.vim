@@ -43,9 +43,9 @@ function! s:AddToResultsWindow(result)
 endfunction
 
 function! s:RunCommandAndAddResults()
-  let script = run_live_lib#GetAllContent()
-
-  let result = system(b:live_mode_command, script)
+  let s:content_list = run_live_lib#GetContentList()
+  let s:content_file = run_live_lib#WriteToFile(s:content_list)
+  let result = system(b:live_mode_command . ' ' . s:content_file)
 
   let working_window_number = winnr()
   call s:AddToResultsWindow(result)
