@@ -29,7 +29,7 @@ Live mode is triggered by the plugin command `:WatchBuffer`
 
 ## Configuration
 
-Other than the 2 installation steps, this plugin requires no additional configuration to get started. In the above example when `<Leader>r` or `:WatchBuffer` is run, the plugin will ask for the shell command to associate with the current buffer
+Other than the installation steps, this plugin requires no additional configuration to get started. In the above example when `<Leader>r` or `:WatchBuffer` is run, the plugin will ask for the shell command to associate with the current buffer
 
 ![](https://raw.github.com/notalex/vim-run-live/screenshots/screenshots/shell-command-prompt.png)
 _Each buffer can have its own results window and its own separate shell command._
