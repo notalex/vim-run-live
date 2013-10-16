@@ -38,7 +38,7 @@ _Each buffer can have its own results window and its own separate shell command.
 
 ### Ftplugin
 
-Vim detects the file type and reads the appropriate file from the ftplugin directory. For example, to add a coffeescript mapping for _run_live_:
+Vim detects the file type and reads the appropriate command from the ftplugin directory. For example, coffeescript will work with the following line:
 
 ```vim
 " ~/.vim/ftplugin/coffee.vim
@@ -47,7 +47,7 @@ let b:run_live_command = 'coffee'
 
 ### Autocommand
 
-It simpler to just add an autocommand for the mapping.
+It simpler to just add an autocommand for the mapping:
 
 ```vim
 " ~/.vimrc
