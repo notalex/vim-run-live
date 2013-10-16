@@ -103,7 +103,7 @@ commands are not needed. E.g., for ruby we usually need the same command
 E.g., it can be desirable to view the evaluated result when a coffeescript file is
 run.
 >
-   let b:run_mode_command = 'coffee -s'
+   let b:run_mode_command = 'coffee'
 <
 
                                                        *'b:live_mode_command'*
@@ -111,7 +111,7 @@ run.
   This can be useful when a specific command needs to be run during live mode.
 E.g., one can have the live preview mode as seen on the coffeescript site.
 >
-   let b:live_mode_command = 'coffee -scb'
+   let b:live_mode_command = 'coffee -cp'
 <
 
 ===============================================================================
@@ -200,7 +200,7 @@ line may be added
 
 ~/.vimrc
 >
-  autocmd! FileType coffee let b:run_live_command = 'coffee -s'
+  autocmd! FileType coffee let b:run_live_command = 'coffee'
 <
 
 With autocmd, however one must also add augroup. Read on 'autocmd-groups' for
