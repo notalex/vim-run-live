@@ -85,7 +85,9 @@ When the number of windows in the current tab exceeds the threshold number, the 
 
 ### Running separate commands for run and live modes
 
-> There are individual commands for run and live modes in addition to the common `b:run_live_command`. This can be helpful for languages like **coffeescript**.
+> There are individual commands for run and live modes in addition to the common `b:run_live_command`.
+
+This can be helpful for languages like **coffeescript**.
 
 ```vim
 " ~/.vimrc
@@ -149,9 +151,8 @@ If the above script is named `compile-and-run`, a cpp file can be executed with 
 
 ## Additional Notes
 
-> This plugin is sourced using Vim's autoload feature and hence it takes no toll on Vim's start up time(which is minimal anyways).
-
-*Run_live* is a pure Vimscript plugin, however if one needs to contribute to the plugin, ruby will be required to run the specs.
+* This plugin is sourced using Vim's autoload feature and hence it takes no toll on Vim's start up time(which is minimal anyways).
+* *Run_live* is a pure Vimscript plugin, however if one needs to contribute to the plugin, ruby will be required to run the specs.
 
 ## Installation
 
