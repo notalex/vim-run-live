@@ -103,6 +103,44 @@ This plugin writes the content to a temporary file and serves the file path as a
 <command> <file_name_without_extension>
 ```
 
+## Language Support
+
+### Interpreted Languages
+
+Most interpreted languages will work with this plugin. The following have been tested to work:
+
+| Language     | Command |
+|--------------|---------|
+| Python       | python  |
+| Ruby         | ruby    |
+| Coffeescript | coffee  |
+| Lisp         | clisp   |
+| Node.js      | node    |
+
+### Compiled Languages
+
+Since compiled languages follow a two step process to execute the program, they will not work directly with *run_live*.
+One will have wrap the compiler command in a shell script which takes a filename, compiles the file and returns the output.
+
+For example, one may use the following script to make this plugin work with c++ files:
+
+```sh
+rm /tmp/a.out 2> /dev/null
+
+# Run-live provides a file name without an extension while g++ expects a valid extension.
+cp $1 /tmp/temp-cpp-file.cpp
+
+g++ /tmp/temp-cpp-file.cpp -o /tmp/a.out
+
+[ -s /tmp/a.out ] && /tmp/a.out
+```
+
+One will have to mark the script as executable and ensure that it is in the load path.
+
+If the above script is named `compile-and-run`, a cpp file can be executed with the command `compile-and-run <file_name>`. Thus *run_live* can use the shell command `compile-and-run` to run c++ files.
+
+> If *run_live* does not work for a specific language, feel free to raise a ticket. I will work out a solution for you.
+
 ## Help
 
 ```vim
