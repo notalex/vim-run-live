@@ -95,6 +95,14 @@ let b:live_mode_command = 'coffee -cp'
 
 ![](https://raw.github.com/notalex/vim-run-live/screenshots/screenshots/run-live-mode-commands.png)
 
+## How It Works
+
+This plugin writes the content to a temporary file and serves the file path as an argument to the shell command that you provide. So any shell command that has the following pattern will work:
+
+```
+<command> <file_name_without_extension>
+```
+
 ## Help
 
 ```vim

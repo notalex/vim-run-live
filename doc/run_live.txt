@@ -9,6 +9,7 @@ CONTENTS                                                   *run-live-contents*
   Mappings      ............................ |run-live-mappings|
   Commands      ............................ |run-live-commands|
   Advanced      ............................ |run-live-advanced|
+  Language Support ......................... |run-live-language-support|
   Where to add these options? .............. |run-live-locations|
 
 ===============================================================================
@@ -159,6 +160,17 @@ variable.
 
   See 'autocmd-events' for a list of events that Vim supports. Add or remove
 events in this variable to customize the live preview for your scripts.
+
+===============================================================================
+LANGUAGE SUPPORT                                    *run-live-language-support*
+
+This plugin writes the content to a temporary file and serves the file path as
+an argument to the shell command that you provide. So any shell command that
+has the following pattern will work:
+
+```
+<command> <file_name_without_extension>
+```
 
 ===============================================================================
 LOCATIONS                                                 *run-live-locations*
