@@ -151,6 +151,8 @@ If the above script is named `compile-and-run`, a cpp file can be executed with 
 
 > This plugin is sourced using Vim's autoload feature and hence it takes no toll on Vim's start up time(which is minimal anyways).
 
+*Run_live* is a pure Vimscript plugin, however if one needs to contribute to the plugin, ruby will be required to run the specs.
+
 ## Installation
 
 > If you don't have a preferred installation method, I recommend using [Vundle][vundle_link]
