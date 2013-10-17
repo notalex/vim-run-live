@@ -122,7 +122,7 @@ Most interpreted languages will work with this plugin. The following have been t
 ### Compiled Languages
 
 Since compiled languages follow a two step process to execute the program, they will not work directly with *run_live*.
-One will have wrap the compiler command in a shell script which takes a filename, compiles the file and returns the output.
+One will have to wrap the compiler command in a shell script which takes a filename, compiles the file and returns the output.
 
 For example, one may use the following script to make this plugin work with c++ files:
 
