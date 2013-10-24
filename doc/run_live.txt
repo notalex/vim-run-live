@@ -75,7 +75,7 @@ Details:~
 Changing this mappings changes the key to trigger run mode. |<Leader>| is
 backslash(\) by default.
 >
-   let g:run_mode_map = <Leader>r
+   let g:run_mode_map = '<Leader>r'
 <
 
 ===============================================================================
