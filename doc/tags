@@ -10,7 +10,9 @@ run-live-commands	run_live.txt	/*run-live-commands*
 run-live-configuration	run_live.txt	/*run-live-configuration*
 run-live-contents	run_live.txt	/*run-live-contents*
 run-live-introduction	run_live.txt	/*run-live-introduction*
+run-live-language-support	run_live.txt	/*run-live-language-support*
 run-live-locations	run_live.txt	/*run-live-locations*
 run-live-mappings	run_live.txt	/*run-live-mappings*
 run-live-modes	run_live.txt	/*run-live-modes*
 run-live.txt	run_live.txt	/*run-live.txt*
+run_live	run_live.txt	/*run_live*
