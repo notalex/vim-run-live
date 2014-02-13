@@ -78,6 +78,15 @@ function! run_live_lib#GetSelectedContentList()
   return split(selected_content, "\n")
 endfunction
 
+function! run_live_lib#CloseWindow(window_name)
+  let l:window_number = bufwinnr(a:window_name)
+
+  if window_number > 0
+    call <SID>BypassThresholdCheckAndSwitchWindow(l:window_number)
+    wincmd q
+  endif
+endfunction
+
 function! run_live_lib#CreateTemporaryWindow(split_type, window_name)
   execute a:split_type . ' ' . a:window_name
   setlocal bufhidden=wipe buftype=nofile

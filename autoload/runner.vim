@@ -52,6 +52,7 @@ function! s:RunBuffer(visualmode)
     call s:AddToResultsWindow(result)
     call s:RestoreWorkingWindow()
   else
+    call run_live_lib#CloseWindow(<SID>ResultsWindowName())
     echom 'No results to display.'
   endif
 endfunction
