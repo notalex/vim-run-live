@@ -16,12 +16,8 @@ function! s:ResultsWindowName()
   return s:results_window_prefix . bufnr('%')
 endfunction
 
-function! s:CreateResultsWindow()
-  call run_live_lib#CreateTemporaryWindow('rightbelow split', s:ResultsWindowName())
-endfunction
-
 function! s:AddToResultsWindow(result)
-  call s:CreateResultsWindow()
+  call run_live_lib#FindOrCreateWindowByName(s:ResultsWindowName())
   call run_live_lib#ClearScreen()
   call run_live_lib#Append(a:result)
   call run_live_lib#SetupUpSkipper()
@@ -50,8 +46,6 @@ function! s:RunBuffer(visualmode)
 
   let s:content_file = run_live_lib#WriteToFile(s:content_list)
   let result = system(b:run_mode_command . ' ' . s:content_file)
-
-  call run_live_lib#CloseWindow(s:ResultsWindowName())
 
   if strlen(result)
     call s:SaveWorkingWindow()

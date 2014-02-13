@@ -11,8 +11,41 @@ endif
 
 " }}}
 
+" Private {{{1
+
+function! s:IsHorizontalSplit()
+  let l:buffer_window_number = bufwinnr('%')
+  wincmd k
+
+  if bufwinnr('%') == l:buffer_window_number
+    let l:is_horizontal_split = 0
+  else
+    call <SID>BypassThresholdCheckAndSwitchWindow(l:buffer_window_number)
+    let l:is_horizontal_split = 1
+  endif
+
+  return l:is_horizontal_split
+endfunction
+
+function! s:BypassThresholdCheckAndSwitchWindow(window_number)
+  let s:bypass_threshold_check = 1
+  call run_live_lib#SwitchToWindow(a:window_number)
+endfunction
+
+"}}}
+
 function! run_live_lib#SwitchToWindow(window_number)
   execute a:window_number . 'wincmd w'
+endfunction
+
+function! run_live_lib#FindOrCreateWindowByName(window_name)
+  let l:window_number = bufwinnr(a:window_name)
+
+  if l:window_number > 0
+    call <SID>BypassThresholdCheckAndSwitchWindow(l:window_number)
+  else
+    call run_live_lib#CreateTemporaryWindow('rightbelow split', a:window_name)
+  endif
 endfunction
 
 function! run_live_lib#Append(result)
@@ -45,16 +78,6 @@ function! run_live_lib#GetSelectedContentList()
   return split(selected_content, "\n")
 endfunction
 
-function! run_live_lib#CloseWindow(window_name)
-  let window_number = bufwinnr(a:window_name)
-
-  if window_number > 0
-    let s:bypass_threshold_check = 1
-    call run_live_lib#SwitchToWindow(window_number)
-    wincmd q
-  endif
-endfunction
-
 function! run_live_lib#CreateTemporaryWindow(split_type, window_name)
   execute a:split_type . ' ' . a:window_name
   setlocal bufhidden=wipe buftype=nofile
@@ -62,10 +85,12 @@ endfunction
 
 " When content is lesser than window height, reduce height to match content.
 function! run_live_lib#AdjustWindowHeight()
-  let results_window_height = winheight('.')
-  let content_height = line('$')
-  let adjusted_height = min([results_window_height, content_height])
-  execute 'resize ' . adjusted_height
+  if <SID>IsHorizontalSplit()
+    let l:half_vim_height = &lines/2
+    let l:content_height = line('$')
+    let l:adjusted_height = min([l:half_vim_height, l:content_height])
+    execute 'resize ' . l:adjusted_height
+  endif
 endfunction
 
 function! run_live_lib#InitializeGlobalVariable(variable_name)
