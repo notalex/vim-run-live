@@ -22,6 +22,10 @@ module Vimrunner
       switch_to_window_by_number(window_number)
     end
 
+    def first_visible_line_number
+      echo("line('w0')").to_i
+    end
+
     def current_window_name
       echo("expand('%')")
     end
