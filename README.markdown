@@ -65,7 +65,7 @@ autocmd! FileType coffee let b:run_live_command = 'coffee'
 let g:run_live_remember_shell_command = 1
 ```
 
-The next time, *run_live* asks for a shell command for a coffeesript file, it will append the shell command to an appropriate ftplugin file.
+The next time, *run_live* asks for a shell command for a coffeescript file, it will append the shell command to an appropriate ftplugin file.
 
 ```vim
 " ~/.vim/ftplugin/coffee.vim
