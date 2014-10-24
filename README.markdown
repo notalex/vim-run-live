@@ -123,6 +123,7 @@ Most interpreted languages will work with this plugin. The following have been t
 | Language     | Command |
 |--------------|---------|
 | Python       | python  |
+| Elixir       | elixir  |
 | Ruby         | ruby    |
 | Coffeescript | coffee  |
 | Lisp         | clisp   |
