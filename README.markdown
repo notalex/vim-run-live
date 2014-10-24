@@ -107,6 +107,15 @@ This plugin writes the content to a temporary file and serves the file path as a
 
 ## Language Support
 
+### SQL
+
+Any database that can execute commands from a file will work with this plugin.
+
+For example, postgres uses the `-f` argument to read any sql script files.
+Thus one can use a psql command like `PGPASSWORD=something psql -d database_name -f` to make it work with this plugin.
+
+![](https://raw.githubusercontent.com/notalex/vim-run-live/screenshots/screenshots/run-live-sql-output.png)
+
 ### Interpreted Languages
 
 Most interpreted languages will work with this plugin. The following have been tested to work:
