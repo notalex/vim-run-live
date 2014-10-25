@@ -39,7 +39,7 @@ function! run_live_lib#SwitchToWindow(window_number)
 endfunction
 
 function! run_live_lib#FindOrCreateWindowByName(window_name)
-  let l:window_number = bufwinnr(a:window_name)
+  let l:window_number = bufwinnr(a:window_name . '$')
 
   if l:window_number > 0
     call <SID>BypassThresholdCheckAndSwitchWindow(l:window_number)
