@@ -120,14 +120,16 @@ Thus one can use a psql command like `PGPASSWORD=something psql -d database_name
 
 Most interpreted languages will work with this plugin. The following have been tested to work:
 
-| Language     | Command |
-|--------------|---------|
-| Python       | python  |
-| Elixir       | elixir  |
-| Ruby         | ruby    |
-| Coffeescript | coffee  |
-| Lisp         | clisp   |
-| Node.js      | node    |
+| Language     | Command   |
+|--------------|-----------|
+| Python       | python    |
+| Elixir       | elixir    |
+| Ruby         | ruby      |
+| Coffeescript | coffee    |
+| Clisp        | clisp     |
+| Racket       | racket -f |
+| Guile        | guile -s  |
+| Node.js      | node      |
 
 ### Compiled Languages
 
